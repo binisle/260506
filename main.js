@@ -1,5 +1,6 @@
 // ── 1. 랜덤 배경 이미지 (Picsum Photos) ──────────────────
-document.body.style.backgroundImage = `url(https://picsum.photos/1920/1080?random=${Math.random()})`;
+const randomNum = Math.floor(Math.random() * 1000);
+document.body.style.backgroundImage = "url(https://picsum.photos/seed/" + randomNum + "/1920/1080)";
 
 // ── 2. 실시간 시계 ─────────────────────────────────────────
 const timeEl = document.getElementById("time");
@@ -104,19 +105,17 @@ todoForm.addEventListener("submit", function(e) {
 
 renderTodos();
 
-// ── 5. 날씨 ────────────────────────────────────────────────
+// ── 5. 날씨 (Open-Meteo — API 키 불필요) ──────────────────
 const weatherEl = document.getElementById("weather-temp");
-const API_KEY = "YOUR_API_KEY";
 
 function getWeather(lat, lon) {
   fetch(
-    "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + API_KEY + "&units=metric"
+    "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current_weather=true"
   )
     .then(function(res) { return res.json(); })
     .then(function(data) {
-      const temp = Math.round(data.main.temp);
-      const desc = data.weather[0].main;
-      weatherEl.innerText = temp + "°C " + desc;
+      const temp = Math.round(data.current_weather.temperature);
+      weatherEl.innerText = temp + "°C";
     })
     .catch(function() {
       weatherEl.innerText = "";
