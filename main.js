@@ -1,7 +1,5 @@
-// ── 1. 랜덤 배경 이미지 (Unsplash 키워드 배열) ─────────────
-const images = ["nature", "mountain", "ocean", "forest", "city", "sunset", "sky", "desert"];
-const randomKeyword = images[Math.floor(Math.random() * images.length)];
-document.body.style.backgroundImage = `url(https://source.unsplash.com/1920x1080/?${randomKeyword})`;
+// ── 1. 랜덤 배경 이미지 (Picsum Photos) ──────────────────
+document.body.style.backgroundImage = `url(https://picsum.photos/1920/1080?random=${Math.random()})`;
 
 // ── 2. 실시간 시계 ─────────────────────────────────────────
 const timeEl = document.getElementById("time");
